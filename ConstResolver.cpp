@@ -33,6 +33,10 @@ namespace {
     int fp_count=0;
     int expr_count=0;
     bool runOnModule(Module &M) override {
+      for (auto It = M.global_begin(), E = M.global_end(); It != E; ++It) {
+         auto* G = &(*It);
+         G->dump();
+    }
       for (auto& F : M) {
            for (auto& B : F) {
                for (auto& I : B) {
@@ -51,7 +55,7 @@ namespace {
                                        }else if (ConstantExpr* CE = (dyn_cast<ConstantExpr>(Const))) {
                                             expr_count++;
                                        }else if (ConstantFP* CF = (dyn_cast<ConstantFP>(Const))) {
-                                            expr_count++;
+                                            fp_count++;
                                        }else {
                                           errs() << "Misc No." <<misc_count<<"'s content is "<< "\n";
                                           (dyn_cast<Value>(Const))->dump(); 
