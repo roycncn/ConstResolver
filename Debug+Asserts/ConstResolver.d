@@ -1,261 +1,245 @@
-/Users/roy/llvm/build/lib/Transforms/const-resolver/Debug+Asserts/ConstResolver.o \
-  /Users/roy/llvm/build/lib/Transforms/const-resolver/Debug+Asserts/ConstResolver.d: \
-  ConstResolver.cpp \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/BitVector.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Compiler.h \
-  /Users/roy/llvm/build/include/llvm/Config/llvm-config.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/ErrorHandling.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/StringRef.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/MathExtras.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/SwapByteOrder.h \
-  /Users/roy/llvm/build/include/llvm/Support/DataTypes.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Module.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/Optional.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/None.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/AlignOf.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/iterator_range.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Comdat.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/DataLayout.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/DenseMap.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/DenseMapInfo.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/ArrayRef.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/Hashing.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Host.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/StringMap.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Allocator.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/SmallVector.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/type_traits.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Memory.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/PointerLikeTypeTraits.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/EpochTracker.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/DerivedTypes.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Type.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/APFloat.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/APInt.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/SmallPtrSet.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/CBindingWrapping.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Casting.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm-c/Types.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Pass.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassSupport.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/InitializePasses.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassInfo.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassRegistry.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/RWMutex.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Threading.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Atomic.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassAnalysisSupport.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Function.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Argument.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/Twine.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/ilist_node.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Attributes.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/FoldingSet.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/iterator.h \
-  /Users/roy/llvm/build/include/llvm/IR/Attributes.inc \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Value.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Use.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/PointerIntPair.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Value.def \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/BasicBlock.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/ilist.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Instruction.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/DebugLoc.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/TrackingMDRef.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Metadata.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/PointerUnion.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Constant.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/User.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/LLVMContext.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Options.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/CommandLine.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Metadata.def \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/SymbolTableListTraits.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Instruction.def \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/CallingConv.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalObject.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalValue.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/OperandTraits.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalAlias.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalVariable.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/CodeGen.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm-c/TargetMachine.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm-c/Target.h \
-  /Users/roy/llvm/build/include/llvm/Config/Targets.def \
-  /Users/roy/llvm/build/include/llvm/Config/AsmPrinters.def \
-  /Users/roy/llvm/build/include/llvm/Config/AsmParsers.def \
-  /Users/roy/llvm/build/include/llvm/Config/Disassemblers.def \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Constants.h \
-  /Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/raw_ostream.h
+/home/parallels/llvm3.6/projects/roy/ConstResolver/Debug+Asserts/ConstResolver.o \
+  /home/parallels/llvm3.6/projects/roy/ConstResolver/Debug+Asserts/ConstResolver.d: \
+  ConstResolver.cpp /home/parallels/llvm3.6/include/llvm/ADT/BitVector.h \
+  /home/parallels/llvm3.6/include/llvm/Support/Compiler.h \
+  /home/parallels/llvm3.6/include/llvm/Config/llvm-config.h \
+  /home/parallels/llvm3.6/include/llvm/Support/ErrorHandling.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/StringRef.h \
+  /home/parallels/llvm3.6/include/llvm/Support/MathExtras.h \
+  /home/parallels/llvm3.6/include/llvm/Support/SwapByteOrder.h \
+  /home/parallels/llvm3.6/include/llvm/Support/DataTypes.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Module.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/iterator_range.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Comdat.h \
+  /home/parallels/llvm3.6/include/llvm/IR/DataLayout.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/DenseMap.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/DenseMapInfo.h \
+  /home/parallels/llvm3.6/include/llvm/Support/PointerLikeTypeTraits.h \
+  /home/parallels/llvm3.6/include/llvm/Support/type_traits.h \
+  /home/parallels/llvm3.6/include/llvm/Support/AlignOf.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/SmallVector.h \
+  /home/parallels/llvm3.6/include/llvm/IR/DerivedTypes.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Type.h \
+  /home/parallels/llvm3.6/include/llvm-c/Core.h \
+  /home/parallels/llvm3.6/include/llvm-c/Support.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/APFloat.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/APInt.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/ArrayRef.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/None.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/STLExtras.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/SmallPtrSet.h \
+  /home/parallels/llvm3.6/include/llvm/Support/CBindingWrapping.h \
+  /home/parallels/llvm3.6/include/llvm/Support/Casting.h \
+  /home/parallels/llvm3.6/include/llvm/Pass.h \
+  /home/parallels/llvm3.6/include/llvm/PassSupport.h \
+  /home/parallels/llvm3.6/include/llvm/InitializePasses.h \
+  /home/parallels/llvm3.6/include/llvm/PassInfo.h \
+  /home/parallels/llvm3.6/include/llvm/PassRegistry.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/StringMap.h \
+  /home/parallels/llvm3.6/include/llvm/Support/Allocator.h \
+  /home/parallels/llvm3.6/include/llvm/Support/Memory.h \
+  /home/parallels/llvm3.6/include/llvm/Support/RWMutex.h \
+  /home/parallels/llvm3.6/include/llvm/Support/Threading.h \
+  /home/parallels/llvm3.6/include/llvm/Support/Atomic.h \
+  /home/parallels/llvm3.6/include/llvm/Support/Valgrind.h \
+  /home/parallels/llvm3.6/include/llvm/PassAnalysisSupport.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Function.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Argument.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/Twine.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/ilist_node.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Attributes.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/FoldingSet.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Value.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Use.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/PointerIntPair.h \
+  /home/parallels/llvm3.6/include/llvm/IR/BasicBlock.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/ilist.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Instruction.h \
+  /home/parallels/llvm3.6/include/llvm/IR/DebugLoc.h \
+  /home/parallels/llvm3.6/include/llvm/IR/TrackingMDRef.h \
+  /home/parallels/llvm3.6/include/llvm/IR/MetadataTracking.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/PointerUnion.h \
+  /home/parallels/llvm3.6/include/llvm/IR/User.h \
+  /home/parallels/llvm3.6/include/llvm/ADT/iterator.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Instruction.def \
+  /home/parallels/llvm3.6/include/llvm/IR/SymbolTableListTraits.h \
+  /home/parallels/llvm3.6/include/llvm/IR/CallingConv.h \
+  /home/parallels/llvm3.6/include/llvm/IR/GlobalObject.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Constant.h \
+  /home/parallels/llvm3.6/include/llvm/IR/GlobalValue.h \
+  /home/parallels/llvm3.6/include/llvm/IR/GlobalAlias.h \
+  /home/parallels/llvm3.6/include/llvm/IR/OperandTraits.h \
+  /home/parallels/llvm3.6/include/llvm/IR/GlobalVariable.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Metadata.h \
+  /home/parallels/llvm3.6/include/llvm/IR/Metadata.def \
+  /home/parallels/llvm3.6/include/llvm/Support/CodeGen.h \
+  /home/parallels/llvm3.6/include/llvm-c/TargetMachine.h \
+  /home/parallels/llvm3.6/include/llvm-c/Target.h \
+  /home/parallels/llvm3.6/include/llvm/Config/Targets.def \
+  /home/parallels/llvm3.6/include/llvm/Config/AsmPrinters.def \
+  /home/parallels/llvm3.6/include/llvm/Config/AsmParsers.def \
+  /home/parallels/llvm3.6/include/llvm/Config/Disassemblers.def \
+  /home/parallels/llvm3.6/include/llvm/IR/Constants.h \
+  /home/parallels/llvm3.6/include/llvm/Support/raw_ostream.h
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/BitVector.h:
+/home/parallels/llvm3.6/include/llvm/ADT/BitVector.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Compiler.h:
+/home/parallels/llvm3.6/include/llvm/Support/Compiler.h:
 
-/Users/roy/llvm/build/include/llvm/Config/llvm-config.h:
+/home/parallels/llvm3.6/include/llvm/Config/llvm-config.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/ErrorHandling.h:
+/home/parallels/llvm3.6/include/llvm/Support/ErrorHandling.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/StringRef.h:
+/home/parallels/llvm3.6/include/llvm/ADT/StringRef.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/MathExtras.h:
+/home/parallels/llvm3.6/include/llvm/Support/MathExtras.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/SwapByteOrder.h:
+/home/parallels/llvm3.6/include/llvm/Support/SwapByteOrder.h:
 
-/Users/roy/llvm/build/include/llvm/Support/DataTypes.h:
+/home/parallels/llvm3.6/include/llvm/Support/DataTypes.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Module.h:
+/home/parallels/llvm3.6/include/llvm/IR/Module.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/Optional.h:
+/home/parallels/llvm3.6/include/llvm/ADT/iterator_range.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/None.h:
+/home/parallels/llvm3.6/include/llvm/IR/Comdat.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/AlignOf.h:
+/home/parallels/llvm3.6/include/llvm/IR/DataLayout.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/iterator_range.h:
+/home/parallels/llvm3.6/include/llvm/ADT/DenseMap.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Comdat.h:
+/home/parallels/llvm3.6/include/llvm/ADT/DenseMapInfo.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/DataLayout.h:
+/home/parallels/llvm3.6/include/llvm/Support/PointerLikeTypeTraits.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/DenseMap.h:
+/home/parallels/llvm3.6/include/llvm/Support/type_traits.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/DenseMapInfo.h:
+/home/parallels/llvm3.6/include/llvm/Support/AlignOf.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/ArrayRef.h:
+/home/parallels/llvm3.6/include/llvm/ADT/SmallVector.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/Hashing.h:
+/home/parallels/llvm3.6/include/llvm/IR/DerivedTypes.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Host.h:
+/home/parallels/llvm3.6/include/llvm/IR/Type.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/StringMap.h:
+/home/parallels/llvm3.6/include/llvm-c/Core.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Allocator.h:
+/home/parallels/llvm3.6/include/llvm-c/Support.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/SmallVector.h:
+/home/parallels/llvm3.6/include/llvm/ADT/APFloat.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/type_traits.h:
+/home/parallels/llvm3.6/include/llvm/ADT/APInt.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Memory.h:
+/home/parallels/llvm3.6/include/llvm/ADT/ArrayRef.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/PointerLikeTypeTraits.h:
+/home/parallels/llvm3.6/include/llvm/ADT/None.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/EpochTracker.h:
+/home/parallels/llvm3.6/include/llvm/ADT/STLExtras.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/DerivedTypes.h:
+/home/parallels/llvm3.6/include/llvm/ADT/SmallPtrSet.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Type.h:
+/home/parallels/llvm3.6/include/llvm/Support/CBindingWrapping.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/APFloat.h:
+/home/parallels/llvm3.6/include/llvm/Support/Casting.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/APInt.h:
+/home/parallels/llvm3.6/include/llvm/Pass.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/SmallPtrSet.h:
+/home/parallels/llvm3.6/include/llvm/PassSupport.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/CBindingWrapping.h:
+/home/parallels/llvm3.6/include/llvm/InitializePasses.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Casting.h:
+/home/parallels/llvm3.6/include/llvm/PassInfo.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm-c/Types.h:
+/home/parallels/llvm3.6/include/llvm/PassRegistry.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Pass.h:
+/home/parallels/llvm3.6/include/llvm/ADT/StringMap.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassSupport.h:
+/home/parallels/llvm3.6/include/llvm/Support/Allocator.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/InitializePasses.h:
+/home/parallels/llvm3.6/include/llvm/Support/Memory.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassInfo.h:
+/home/parallels/llvm3.6/include/llvm/Support/RWMutex.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassRegistry.h:
+/home/parallels/llvm3.6/include/llvm/Support/Threading.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/RWMutex.h:
+/home/parallels/llvm3.6/include/llvm/Support/Atomic.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Threading.h:
+/home/parallels/llvm3.6/include/llvm/Support/Valgrind.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Atomic.h:
+/home/parallels/llvm3.6/include/llvm/PassAnalysisSupport.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/PassAnalysisSupport.h:
+/home/parallels/llvm3.6/include/llvm/IR/Function.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Function.h:
+/home/parallels/llvm3.6/include/llvm/IR/Argument.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Argument.h:
+/home/parallels/llvm3.6/include/llvm/ADT/Twine.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/Twine.h:
+/home/parallels/llvm3.6/include/llvm/ADT/ilist_node.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/ilist_node.h:
+/home/parallels/llvm3.6/include/llvm/IR/Attributes.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Attributes.h:
+/home/parallels/llvm3.6/include/llvm/ADT/FoldingSet.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/FoldingSet.h:
+/home/parallels/llvm3.6/include/llvm/IR/Value.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/iterator.h:
+/home/parallels/llvm3.6/include/llvm/IR/Use.h:
 
-/Users/roy/llvm/build/include/llvm/IR/Attributes.inc:
+/home/parallels/llvm3.6/include/llvm/ADT/PointerIntPair.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Value.h:
+/home/parallels/llvm3.6/include/llvm/IR/BasicBlock.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Use.h:
+/home/parallels/llvm3.6/include/llvm/ADT/ilist.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/PointerIntPair.h:
+/home/parallels/llvm3.6/include/llvm/IR/Instruction.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Value.def:
+/home/parallels/llvm3.6/include/llvm/IR/DebugLoc.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/BasicBlock.h:
+/home/parallels/llvm3.6/include/llvm/IR/TrackingMDRef.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/ilist.h:
+/home/parallels/llvm3.6/include/llvm/IR/MetadataTracking.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Instruction.h:
+/home/parallels/llvm3.6/include/llvm/ADT/PointerUnion.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/DebugLoc.h:
+/home/parallels/llvm3.6/include/llvm/IR/User.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/TrackingMDRef.h:
+/home/parallels/llvm3.6/include/llvm/ADT/iterator.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Metadata.h:
+/home/parallels/llvm3.6/include/llvm/IR/Instruction.def:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/ADT/PointerUnion.h:
+/home/parallels/llvm3.6/include/llvm/IR/SymbolTableListTraits.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Constant.h:
+/home/parallels/llvm3.6/include/llvm/IR/CallingConv.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/User.h:
+/home/parallels/llvm3.6/include/llvm/IR/GlobalObject.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/LLVMContext.h:
+/home/parallels/llvm3.6/include/llvm/IR/Constant.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/Options.h:
+/home/parallels/llvm3.6/include/llvm/IR/GlobalValue.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/CommandLine.h:
+/home/parallels/llvm3.6/include/llvm/IR/GlobalAlias.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Metadata.def:
+/home/parallels/llvm3.6/include/llvm/IR/OperandTraits.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/SymbolTableListTraits.h:
+/home/parallels/llvm3.6/include/llvm/IR/GlobalVariable.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Instruction.def:
+/home/parallels/llvm3.6/include/llvm/IR/Metadata.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/CallingConv.h:
+/home/parallels/llvm3.6/include/llvm/IR/Metadata.def:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalObject.h:
+/home/parallels/llvm3.6/include/llvm/Support/CodeGen.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalValue.h:
+/home/parallels/llvm3.6/include/llvm-c/TargetMachine.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/OperandTraits.h:
+/home/parallels/llvm3.6/include/llvm-c/Target.h:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalAlias.h:
+/home/parallels/llvm3.6/include/llvm/Config/Targets.def:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/GlobalVariable.h:
+/home/parallels/llvm3.6/include/llvm/Config/AsmPrinters.def:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/CodeGen.h:
+/home/parallels/llvm3.6/include/llvm/Config/AsmParsers.def:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm-c/TargetMachine.h:
+/home/parallels/llvm3.6/include/llvm/Config/Disassemblers.def:
 
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm-c/Target.h:
+/home/parallels/llvm3.6/include/llvm/IR/Constants.h:
 
-/Users/roy/llvm/build/include/llvm/Config/Targets.def:
-
-/Users/roy/llvm/build/include/llvm/Config/AsmPrinters.def:
-
-/Users/roy/llvm/build/include/llvm/Config/AsmParsers.def:
-
-/Users/roy/llvm/build/include/llvm/Config/Disassemblers.def:
-
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/IR/Constants.h:
-
-/Users/roy/llvm/llvm/llvm-3.8.0.src/include/llvm/Support/raw_ostream.h:
+/home/parallels/llvm3.6/include/llvm/Support/raw_ostream.h:

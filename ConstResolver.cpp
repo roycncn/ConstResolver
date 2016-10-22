@@ -76,6 +76,7 @@ namespace {
            auto* G = &(*It);
 
            outputBitVector(getBitVector(G));
+           if (G->hasInitializer()) outputBitVector(getBitVector(G->getInitializer()));
       }
 
       for (auto& F : M) {
