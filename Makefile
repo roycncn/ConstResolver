@@ -7,7 +7,7 @@
 #
 ##===----------------------------------------------------------------------===##
 
-LEVEL = ../../..
+LEVEL = ../..
 LIBRARYNAME = ConstResolver
 LOADABLE_MODULE = 1
 USEDLIBS =
