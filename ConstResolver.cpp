@@ -13,6 +13,8 @@
 #include "llvm/IR/Constant.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Constants.h"
+#include "llvm/ADT/APInt.h"
+#include "llvm/ADT/APFloat.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
 #include <memory>
@@ -52,12 +54,49 @@ namespace {
     }
 
     std::shared_ptr<BitVector> getBitVector(Constant* Const) {
+	 BitVector BV;
 	 if (isa<Function>(Const)){
 		errs()<<"Function"<<"\n";
-	 }else if(ConstantInt* CI = (dyn_cast<ConstantInt>(Const))){
+	// }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
+	//	errs()<<CI->getBitWidth()<<"\n";
+	 }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
+	 	 CI->getValue().getRawData();
+	 }else if(ConstantFP* FP = dyn_cast<ConstantFP>(Const)){
+	 	//errs()<<"FP" <<FP->getValueAPF().bitcastToAPInt()<<"\n"; Solved
+	 }else if(dyn_cast<GlobalValue>(Const)){
+		errs()<<"Skip the Global Value"<<"\n";
+	 }else if(dyn_cast<GlobalValue>(Const)){
+		errs()<<"Skip the Global Value"<<"\n";
+	 }else if(dyn_cast<GlobalValue>(Const)){
+		errs()<<"Skip the Global Value"<<"\n";
+	 }else if(dyn_cast<GlobalValue>(Const)){
+		errs()<<"Skip the Global Value"<<"\n";
+	 }else if(dyn_cast<ConstantAggregateZero>(Const)){
+		errs()<<"Skip the Aggregate Zeor"<<"\n";
+	 }else if(dyn_cast<ConstantDataSequential>(Const)){
+		errs()<<"Skip the Array"<<"\n";
+	 }else if(dyn_cast<ConstantExpr>(Const)){
+		errs()<<"Skip the Expr"<<"\n";
+	 }else if(dyn_cast<ConstantPointerNull>(Const)){
+		errs()<<"Skip the NULL POINTER"<<"\n";
+	 }else if(dyn_cast<ConstantStruct>(Const)){
+		errs()<<"Skip the Struct"<<"\n";
+	 }else if(dyn_cast<ConstantAggregateZero>(Const)){
+		errs()<<"Skip the Aggregate Zeor"<<"\n";
+	 }else if(dyn_cast<ConstantDataSequential>(Const)){
+		errs()<<"Skip the Array"<<"\n";
+	 }else if(ConstantArray* CA = dyn_cast<ConstantArray>(Const)){
+ 		//errs()<< CA->getOperand(0)<<"\n";
+		//CA->dump();
+	 }else if(dyn_cast<ConstantExpr>(Const)){
+		errs()<<"Skip the Expr"<<"\n";
+	 }else if(dyn_cast<ConstantPointerNull>(Const)){
+		errs()<<"Skip the NULL POINTER"<<"\n";
+	 }else{
+		
 		errs()<<Const->getUniqueInteger()<<"\n";
-	 }
-         return std::make_shared<BitVector>(64, false);
+	}
+         return std::make_shared<BitVector>(BV);
     }
 
     void outputBitVector(std::shared_ptr<BitVector> BV) {
