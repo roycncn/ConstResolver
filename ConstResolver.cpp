@@ -66,17 +66,16 @@ namespace {
 			if((Value >> i) & 1)
 				BV->set(i);
 		}
-		for (i = 63; i >=0; --i) { 
-			if(BV->test(i))
-				errs()<<1;
-			else
-				errs()<<0;
-		}
-		errs() << " <====> ";	
 		errs() << CI->getValue().getLimitedValue()<<"\n";
 	 }else if(ConstantFP* FP = dyn_cast<ConstantFP>(Const)){
-	 	//errs()<<"FP" <<FP->getValueAPF().bitcastToAPInt()<<"\n"; Solved
-	 }else if(dyn_cast<GlobalValue>(Const)){
+	 	uint64_t Value = FP->getValueAPF().bitcastToAPInt().getLimitedValue();
+	 	int i;
+		for (i = 0; i < 64; ++i) { 
+			if((Value >> i) & 1)
+				BV->set(i);
+		}
+		errs() <<"-----------------> FP -------------->";
+	}else if(dyn_cast<GlobalValue>(Const)){
 		errs()<<"Skip the Global Value"<<"\n";
 	 }else if(dyn_cast<GlobalValue>(Const)){
 		errs()<<"Skip the Global Value"<<"\n";
@@ -113,8 +112,15 @@ namespace {
     }
 
     void outputBitVector(std::shared_ptr<BitVector> BV) {
-         // TODO Writing code here
-         // Output BV to stdin in proper way
+        	int i = BV->size()-1;
+		for (; i >=0; --i) { 
+			if(BV->test(i))
+				errs()<<1;
+			else
+				errs()<<0;
+		}
+		errs() << "\n";	
+		// Output BV to stdin in proper way
     }
 
     // TODO Writing code here (e.g. adding functions)
