@@ -54,13 +54,26 @@ namespace {
     }
 
     std::shared_ptr<BitVector> getBitVector(Constant* Const) {
-	 BitVector BV;
+	 std::shared_ptr<BitVector> BV = std::make_shared<BitVector>(64,false);
 	 if (isa<Function>(Const)){
 		errs()<<"Function"<<"\n";
 	// }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
 	//	errs()<<CI->getBitWidth()<<"\n";
 	 }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
-	 	 CI->getValue().getRawData();
+		uint64_t Value = CI->getValue().getLimitedValue();
+		int i;
+		for (i = 0; i < 64; ++i) { 
+			if((Value >> i) & 1)
+				BV->set(i);
+		}
+		for (i = 63; i >=0; --i) { 
+			if(BV->test(i))
+				errs()<<1;
+			else
+				errs()<<0;
+		}
+		errs() << " <====> ";	
+		errs() << CI->getValue().getLimitedValue()<<"\n";
 	 }else if(ConstantFP* FP = dyn_cast<ConstantFP>(Const)){
 	 	//errs()<<"FP" <<FP->getValueAPF().bitcastToAPInt()<<"\n"; Solved
 	 }else if(dyn_cast<GlobalValue>(Const)){
@@ -96,7 +109,7 @@ namespace {
 		
 		errs()<<Const->getUniqueInteger()<<"\n";
 	}
-         return std::make_shared<BitVector>(BV);
+         return BV;
     }
 
     void outputBitVector(std::shared_ptr<BitVector> BV) {
