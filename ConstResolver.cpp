@@ -54,59 +54,71 @@ namespace {
     }
 
     std::shared_ptr<BitVector> getBitVector(Constant* Const) {
-	 std::shared_ptr<BitVector> BV = std::make_shared<BitVector>(64,false);
+	 std::shared_ptr<BitVector> BV  = std::make_shared<BitVector>(0,false);
 	 if (isa<Function>(Const)){
-		errs()<<"Function"<<"\n";
+		//errs()<<"Function"<<"\n";
 	// }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
 	//	errs()<<CI->getBitWidth()<<"\n";
 	 }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
-		uint64_t Value = CI->getValue().getLimitedValue();
+		int bitwidth = CI->getBitWidth();
+		int value = CI->getValue().getLimitedValue();
 		int i;
-		for (i = 0; i < 64; ++i) { 
-			if((Value >> i) & 1)
+		BV = std::make_shared<BitVector>(bitwidth,false);
+		for (i = 0; i < bitwidth; ++i) { 
+			if((CI->getValue().getLimitedValue() >> i) & 1)
 				BV->set(i);
 		}
-		errs() << CI->getValue().getLimitedValue()<<"\n";
 	 }else if(ConstantFP* FP = dyn_cast<ConstantFP>(Const)){
 	 	uint64_t Value = FP->getValueAPF().bitcastToAPInt().getLimitedValue();
 	 	int i;
+		BV = std::make_shared<BitVector>(64,false);
 		for (i = 0; i < 64; ++i) { 
 			if((Value >> i) & 1)
 				BV->set(i);
 		}
-		errs() <<"-----------------> FP -------------->";
-	}else if(dyn_cast<GlobalValue>(Const)){
-		errs()<<"Skip the Global Value"<<"\n";
+		//errs() <<"-----------------> FP -------------->";
 	 }else if(dyn_cast<GlobalValue>(Const)){
-		errs()<<"Skip the Global Value"<<"\n";
-	 }else if(dyn_cast<GlobalValue>(Const)){
-		errs()<<"Skip the Global Value"<<"\n";
-	 }else if(dyn_cast<GlobalValue>(Const)){
-		errs()<<"Skip the Global Value"<<"\n";
+		//errs()<<"Skip the Global Value"<<"\n";
 	 }else if(dyn_cast<ConstantAggregateZero>(Const)){
-		errs()<<"Skip the Aggregate Zeor"<<"\n";
+		//errs()<<"Skip the Aggregate Zeor"<<"\n";
 	 }else if(dyn_cast<ConstantDataSequential>(Const)){
-		errs()<<"Skip the Array"<<"\n";
+		//errs()<<"Skip the Array"<<"\n";
 	 }else if(dyn_cast<ConstantExpr>(Const)){
-		errs()<<"Skip the Expr"<<"\n";
+		//errs()<<"Skip the Expr"<<"\n";
 	 }else if(dyn_cast<ConstantPointerNull>(Const)){
-		errs()<<"Skip the NULL POINTER"<<"\n";
-	 }else if(dyn_cast<ConstantStruct>(Const)){
-		errs()<<"Skip the Struct"<<"\n";
-	 }else if(dyn_cast<ConstantAggregateZero>(Const)){
-		errs()<<"Skip the Aggregate Zeor"<<"\n";
+		//errs()<<"Skip the NULL POINTER"<<"\n";
+	 }else if(ConstantStruct* CS = dyn_cast<ConstantStruct>(Const)){
+
+
+	 	if (dyn_cast<Function>(CS->getOperand(1))) {
+	 		//errs()<<"Function"<<"\n";
+	 	}else{
+	 		int x = CS->getType()->getNumElements();
+	 		for(int xx=0 ; xx<x; xx++){
+	 			getBitVector(dyn_cast<Constant>(CS->getOperand(xx)));
+	 		}
+	 		
+
+		}
+
 	 }else if(dyn_cast<ConstantDataSequential>(Const)){
-		errs()<<"Skip the Array"<<"\n";
+		//errs()<<"Skip the Array"<<"\n";
 	 }else if(ConstantArray* CA = dyn_cast<ConstantArray>(Const)){
  		//errs()<< CA->getOperand(0)<<"\n";
 		//CA->dump();
 	 }else if(dyn_cast<ConstantExpr>(Const)){
-		errs()<<"Skip the Expr"<<"\n";
-	 }else if(dyn_cast<ConstantPointerNull>(Const)){
-		errs()<<"Skip the NULL POINTER"<<"\n";
+		//errs()<<"Skip the Expr"<<"\n";
+	 }else if(dyn_cast<BlockAddress>(Const)){
+		//errs()<<"Skip the NULL POINTER"<<"\n";
+	 }else if(dyn_cast<ConstantVector>(Const)){
+		//errs()<<"Skip the NULL POINTER"<<"\n";
+	 }else if(UndefValue* UV = dyn_cast<UndefValue>(Const)){
+		unsigned x =2;
+		errs() << UV->getElementValue(x);
+
 	 }else{
 		
-		errs()<<Const->getUniqueInteger()<<"\n";
+		errs()<<"UnCaught Cases"<<"\n";
 	}
          return BV;
     }
@@ -114,12 +126,14 @@ namespace {
     void outputBitVector(std::shared_ptr<BitVector> BV) {
         	int i = BV->size()-1;
 		for (; i >=0; --i) { 
-			if(BV->test(i))
-				errs()<<1;
-			else
-				errs()<<0;
+			if(BV->test(i)){
+				//errs()<<1;
+			}
+			else{
+				//errs()<<0;
+			}
 		}
-		errs() << "\n";	
+		//errs() << "\n";	
 		// Output BV to stdin in proper way
     }
 
