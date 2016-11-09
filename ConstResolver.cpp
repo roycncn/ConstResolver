@@ -80,15 +80,20 @@ namespace {
 	 }else if(dyn_cast<GlobalValue>(Const)){
 		//errs()<<"Skip the Global Value"<<"\n";
 	 }else if(dyn_cast<ConstantAggregateZero>(Const)){
-		//errs()<<"Skip the Aggregate Zeor"<<"\n";
-	 }else if(dyn_cast<ConstantDataSequential>(Const)){
+		//errs()<<"ZERO"<<"\n";
+	 }else if(ConstantDataSequential *CDS = dyn_cast<ConstantDataSequential>(Const)){
+		//errs()<<"========================"<<"\n";
+		//CDS->dump();
+		//errs()<<CDS->getElementByteSize()*CDS->getNumElements()*8<<"\n";  <--Length
 		//errs()<<"Skip the Array"<<"\n";
-	 }else if(dyn_cast<ConstantExpr>(Const)){
-		//Const->dump();
+		//for (int xx=0;xx<CDS->getNumElements();xx++){
+			//errs()<<CDS->getElementAsInteger(xx)<<" ";
+		//}
+		//errs()<<"\n";
+		//errs()<<"========================"<<"\n";
 	 }else if(dyn_cast<ConstantPointerNull>(Const)){
-		//errs()<<"Skip the NULL POINTER"<<"\n";
+		//errs()<<"NULL PTR"
 	 }else if(ConstantStruct* CS = dyn_cast<ConstantStruct>(Const)){
-
 
 	 	if (dyn_cast<Function>(CS->getOperand(1))) {
 	 		//errs()<<"Function"<<"\n";
@@ -97,10 +102,8 @@ namespace {
 	 		for(int xx=0 ; xx<x; xx++){
 	 			if (ConstantStruct* xxx = (dyn_cast<ConstantStruct>(CS->getOperand(xx)))) {
 	 				if (ConstantExpr* xxxx = dyn_cast<ConstantExpr>(xxx->getOperand(0))){
-	 					xxxx->dump();
-	 					errs()<<xxxx->getOperand(0)->getValueName() + xxxx->getOperand(1)->getType()->getPrimitiveSizeInBits() <<"\n";
-						errs()<<xxxx->getOperand(1)->getType()->getPrimitiveSizeInBits()<<"\n";
-						errs()<<xxxx->getOperand(2)->getValueName()<<"\n";				
+	 					//xxxx->dump();
+	 								
 	 				};
 
 	 			}
@@ -109,19 +112,20 @@ namespace {
 
 		}
 
-	 }else if(dyn_cast<ConstantDataSequential>(Const)){
-		//errs()<<"Skip the Array"<<"\n";
 	 }else if(ConstantArray* CA = dyn_cast<ConstantArray>(Const)){
- 		//errs()<< CA->getOperand(0)<<"\n";
-		//CA->dump();
-	 }else if(dyn_cast<ConstantExpr>(Const)){
-		//errs()<<"Skip the Expr"<<"\n";
-	 }else if(dyn_cast<BlockAddress>(Const)){
-		//errs()<<"Skip the NULL POINTER"<<"\n";
-	 }else if(dyn_cast<ConstantVector>(Const)){
-		//errs()<<"Skip the NULL POINTER"<<"\n";
+	 	//->consist of first class type 
+/*	 	errs()<<"========================"<<"\n";
+ 		errs()<< isa<ConstantStruct>(CA->getOperand(0))<<"\n";
+		CA->dump();
+		errs()<<"========================"<<"\n";*/
+	 }else if(ConstantExpr *CE = dyn_cast<ConstantExpr>(Const)){
+	 	unsigned int result = 0;
+	 	result = CE->getOperand(0)->getValueName();
+	 	for(int count = 1;count<CE->getNumOperands();count++){
+			result =+ CE->getOperand(count)->getType()->getPrimitiveSizeInBits();
+	 	}
 	 }else if(UndefValue* UV = dyn_cast<UndefValue>(Const)){
-		
+		errs()<<"UndefValue"<<"\n";
 	 }else{
 		
 		errs()<<"UnCaught Cases"<<"\n";
