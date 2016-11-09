@@ -84,7 +84,7 @@ namespace {
 	 }else if(dyn_cast<ConstantDataSequential>(Const)){
 		//errs()<<"Skip the Array"<<"\n";
 	 }else if(dyn_cast<ConstantExpr>(Const)){
-		//errs()<<"Skip the Expr"<<"\n";
+		//Const->dump();
 	 }else if(dyn_cast<ConstantPointerNull>(Const)){
 		//errs()<<"Skip the NULL POINTER"<<"\n";
 	 }else if(ConstantStruct* CS = dyn_cast<ConstantStruct>(Const)){
@@ -95,7 +95,15 @@ namespace {
 	 	}else{
 	 		int x = CS->getType()->getNumElements();
 	 		for(int xx=0 ; xx<x; xx++){
-	 			getBitVector(dyn_cast<Constant>(CS->getOperand(xx)));
+	 			if (ConstantStruct* xxx = (dyn_cast<ConstantStruct>(CS->getOperand(xx)))) {
+	 				if (ConstantExpr* xxxx = dyn_cast<ConstantExpr>(xxx->getOperand(0))){
+	 					xxxx->dump();
+	 					errs()<<xxxx->getOperand(0)->getValueName() + xxxx->getOperand(1)->getType()->getPrimitiveSizeInBits() <<"\n";
+						errs()<<xxxx->getOperand(1)->getType()->getPrimitiveSizeInBits()<<"\n";
+						errs()<<xxxx->getOperand(2)->getValueName()<<"\n";				
+	 				};
+
+	 			}
 	 		}
 	 		
 
@@ -113,9 +121,7 @@ namespace {
 	 }else if(dyn_cast<ConstantVector>(Const)){
 		//errs()<<"Skip the NULL POINTER"<<"\n";
 	 }else if(UndefValue* UV = dyn_cast<UndefValue>(Const)){
-		unsigned x =2;
-		errs() << UV->getElementValue(x);
-
+		
 	 }else{
 		
 		errs()<<"UnCaught Cases"<<"\n";
