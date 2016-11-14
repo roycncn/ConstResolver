@@ -60,13 +60,16 @@ namespace {
 
 
 	 if (isa<Function>(Const)){
-		//errs()<<"Skip Function"<<"\n";
-	 }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
+		errs()<<"Skip Function"<<"\n";
 
+	 }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
+	 	errs()<<"ConstantInt :";
+	 	CI->dump();
 		int bitwidth = CI->getBitWidth();
 		int value = CI->getValue().getLimitedValue();
 		int i;
 		BV = std::make_shared<BitVector>(bitwidth,false);
+
 		for (i = 0; i < bitwidth; ++i) { 
 			if((CI->getValue().getLimitedValue() >> i) & 1)
 				BV->set(i);
@@ -101,7 +104,7 @@ namespace {
 			}else{
 
 				GV->getOperand(0)->getType()->dump();
-				errs()<<"Not Handle"<<"\n";
+				errs()<<"Not Handle Type"<<"\n";
 			
 			}
 			
@@ -109,18 +112,16 @@ namespace {
 		
 	 
 	 }else if(dyn_cast<ConstantAggregateZero>(Const)){
-		//errs()<<"ZERO"<<"\n";
+		errs()<<"ConstantAggregateZero"<<"\n";
 	 }else if(ConstantDataSequential *CDS = dyn_cast<ConstantDataSequential>(Const)){
-	 	//errs()<<"=========================================="<<"\n";
-	 	//CDS->dump();
+	 	errs()<<"\n";
+	 	CDS->dump();
 		int bitwidth = CDS->getElementByteSize()*CDS->getNumElements()*8;
 		int elementbitwidth = CDS->getElementByteSize()*8;
 		int i = 0;
 		std::vector<bool> all;
-
-	
 			for (int j=0;j < CDS->getNumElements();j++){
-				//errs()<<"This Number is: "<<CDS->getElementAsInteger(j)<<"\n";
+				errs()<<"Data is: "<<CDS->getElementAsInteger(j)<<"| Bit is:";
 				std::vector<bool> v;
 				for(int k =0;k< elementbitwidth ;++k){
 					if((CDS->getElementAsInteger(j)>> k) & 1){
@@ -134,40 +135,32 @@ namespace {
 
 				for (std::vector<bool>::iterator it = v.begin() ; it != v.end(); ++it){
     				if(*it){
-						//errs() << "1";
+						errs() << "1";
 						all.push_back(true);
     				}else{
-						//errs() << "0";
+						errs() << "0";
 						all.push_back(false);
     				}
 				}
-
+				errs() << "\n";
 
 				
 			}
-
-
-	
 
 		
 		return boolv2bitv(all);
 		
 	 }else if(dyn_cast<ConstantPointerNull>(Const)){
-			//errs()<<"NULL PTR"<<"\n";
+			errs()<<"ConstantPointerNull"<<"\n";
 	 }else if(ConstantStruct* CS = dyn_cast<ConstantStruct>(Const)){
 
 	 	if (dyn_cast<Function>(CS->getOperand(1))) {
-	 		//errs()<<"Function"<<"\n";
+	 		errs()<<"Skip Function"<<"\n";
 	 	}else{
-	 		int x = CS->getType()->getNumElements();
-	 		for(int xx=0 ; xx<x; xx++){
-	 			if (ConstantStruct* xxx = (dyn_cast<ConstantStruct>(CS->getOperand(xx)))) {
-	 				if (ConstantExpr* xxxx = dyn_cast<ConstantExpr>(xxx->getOperand(0))){
-	 					return getBitVector(xxxx);
-	 								
-	 				};
 
-	 			}
+	 		int elementsNum = CS->getType()->getNumElements();
+	 		for(int i=0 ; i<elementsNum; i++){
+	 			return getBitVector(dyn_cast<Constant>(CS->getOperand(i)));
 	 		}
 	 		
 
@@ -175,17 +168,23 @@ namespace {
 
 	 }else if(ConstantExpr *CE = dyn_cast<ConstantExpr>(Const)){
 	 	unsigned int result = 0;
+
 	 	if(isa<Function>(CE->getOperand(0))){
 
- 				//errs()<<"Function"<<"\n";
+ 				errs()<<"Skip Function"<<"\n";
 
- 		}else if(isa<ConstantExpr>(CE->getOperand(0))){
-				
-				//errs()<<"==========="<<"\n";
- 			
+ 		}else if (strcmp(CE->getOpcodeName(),"getelementptr")==0){
+				return getBitVector(CE->getOperand(0));
+ 		}else if (strcmp(CE->getOpcodeName(),"bitcast")==0){
+ 			    return getBitVector(CE->getOperand(0));
+ 		}else if (strcmp(CE->getOpcodeName(),"inttoptr")==0){
+				return getBitVector(CE->getOperand(0));
+ 		}else if (strcmp(CE->getOpcodeName(),"ptrtoint")==0){
+				return getBitVector(CE->getOperand(0));
+
  		}else {
 
-				//CE->dump();
+ 				errs()<<"UnCaught Operation "<<CE->getOpcodeName()<<"\n";
  		}
 	 	return BV;
 
@@ -203,7 +202,10 @@ namespace {
 
  		}else if(isa<ConstantPointerNull>(CAC)){
 
- 				//errs()<<"NULL Pointer"<<"\n";
+ 				errs()<<"ConstantPointerNull"<<"\n";
+ 		}else {
+
+ 			errs()<<"UnCaught ConstantArray"<<"\n";
  		}
 
 
@@ -223,6 +225,7 @@ namespace {
         int i = BV->size()-1;
         if(i<=0)
         	return;
+        errs()<<"**OutputBitVector: ";
 		for (; i >=0; --i) { 
 			if(BV->test(i)){
 				errs()<<1;
@@ -231,7 +234,7 @@ namespace {
 				errs()<<0;
 			}
 		}
-		errs() << "\n";	
+		errs() << "**\n";	
 
     }
 
