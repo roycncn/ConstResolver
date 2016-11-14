@@ -16,6 +16,7 @@
 #include "llvm/ADT/APInt.h"
 #include "llvm/ADT/APFloat.h"
 #include "llvm/Pass.h"
+#include "llvm/IR/GlobalValue.h"
 #include "llvm/Support/raw_ostream.h"
 #include <memory>
 
@@ -54,12 +55,14 @@ namespace {
     }
 
     std::shared_ptr<BitVector> getBitVector(Constant* Const) {
-	 std::shared_ptr<BitVector> BV  = std::make_shared<BitVector>(0,false);
+
+	std::shared_ptr<BitVector> BV  = std::make_shared<BitVector>(0,false);
+
+
 	 if (isa<Function>(Const)){
-		//errs()<<"Function"<<"\n";
-	// }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
-	//	errs()<<CI->getBitWidth()<<"\n";
+		//errs()<<"Skip Function"<<"\n";
 	 }else if(ConstantInt* CI = dyn_cast<ConstantInt>(Const)){
+
 		int bitwidth = CI->getBitWidth();
 		int value = CI->getValue().getLimitedValue();
 		int i;
@@ -68,7 +71,10 @@ namespace {
 			if((CI->getValue().getLimitedValue() >> i) & 1)
 				BV->set(i);
 		}
+		return BV;
+
 	 }else if(ConstantFP* FP = dyn_cast<ConstantFP>(Const)){
+
 	 	uint64_t Value = FP->getValueAPF().bitcastToAPInt().getLimitedValue();
 	 	int i;
 		BV = std::make_shared<BitVector>(64,false);
@@ -76,23 +82,78 @@ namespace {
 			if((Value >> i) & 1)
 				BV->set(i);
 		}
-		//errs() <<"-----------------> FP -------------->";
-	 }else if(dyn_cast<GlobalValue>(Const)){
-		//errs()<<"Skip the Global Value"<<"\n";
+		return BV;
+
+	 }else if(GlobalValue *GV = dyn_cast<GlobalValue>(Const)){
+
+	 	if(GV->getNumOperands()!=0){
+			Type* type = GV->getOperand(0)->getType();
+			Constant* GVC = dyn_cast<Constant>(GV->getOperand(0));
+			if(type->isIntegerTy()){
+				return getBitVector(GVC);
+			}else if(type->isStructTy()){
+				return getBitVector(GVC);
+			}else if(type->isArrayTy()){
+				return getBitVector(GVC);
+			}else if(type->isPointerTy()){
+				return getBitVector(GVC);
+			
+			}else{
+
+				GV->getOperand(0)->getType()->dump();
+				errs()<<"Not Handle"<<"\n";
+			
+			}
+			
+	 	}
+		
+	 
 	 }else if(dyn_cast<ConstantAggregateZero>(Const)){
 		//errs()<<"ZERO"<<"\n";
 	 }else if(ConstantDataSequential *CDS = dyn_cast<ConstantDataSequential>(Const)){
-		//errs()<<"========================"<<"\n";
-		//CDS->dump();
-		//errs()<<CDS->getElementByteSize()*CDS->getNumElements()*8<<"\n";  <--Length
-		//errs()<<"Skip the Array"<<"\n";
-		//for (int xx=0;xx<CDS->getNumElements();xx++){
-			//errs()<<CDS->getElementAsInteger(xx)<<" ";
-		//}
-		//errs()<<"\n";
-		//errs()<<"========================"<<"\n";
+	 	//errs()<<"=========================================="<<"\n";
+	 	//CDS->dump();
+		int bitwidth = CDS->getElementByteSize()*CDS->getNumElements()*8;
+		int elementbitwidth = CDS->getElementByteSize()*8;
+		int i = 0;
+		std::vector<bool> all;
+
+	
+			for (int j=0;j < CDS->getNumElements();j++){
+				//errs()<<"This Number is: "<<CDS->getElementAsInteger(j)<<"\n";
+				std::vector<bool> v;
+				for(int k =0;k< elementbitwidth ;++k){
+					if((CDS->getElementAsInteger(j)>> k) & 1){
+						v.push_back(true);
+					}else{
+						v.push_back(false);
+					}
+						
+				}
+				reverse(v.begin(), v.end());
+
+				for (std::vector<bool>::iterator it = v.begin() ; it != v.end(); ++it){
+    				if(*it){
+						//errs() << "1";
+						all.push_back(true);
+    				}else{
+						//errs() << "0";
+						all.push_back(false);
+    				}
+				}
+
+
+				
+			}
+
+
+	
+
+		
+		return boolv2bitv(all);
+		
 	 }else if(dyn_cast<ConstantPointerNull>(Const)){
-		//errs()<<"NULL PTR"
+			//errs()<<"NULL PTR"<<"\n";
 	 }else if(ConstantStruct* CS = dyn_cast<ConstantStruct>(Const)){
 
 	 	if (dyn_cast<Function>(CS->getOperand(1))) {
@@ -102,7 +163,7 @@ namespace {
 	 		for(int xx=0 ; xx<x; xx++){
 	 			if (ConstantStruct* xxx = (dyn_cast<ConstantStruct>(CS->getOperand(xx)))) {
 	 				if (ConstantExpr* xxxx = dyn_cast<ConstantExpr>(xxx->getOperand(0))){
-	 					//xxxx->dump();
+	 					return getBitVector(xxxx);
 	 								
 	 				};
 
@@ -112,42 +173,84 @@ namespace {
 
 		}
 
-	 }else if(ConstantArray* CA = dyn_cast<ConstantArray>(Const)){
-	 	//->consist of first class type 
-/*	 	errs()<<"========================"<<"\n";
- 		errs()<< isa<ConstantStruct>(CA->getOperand(0))<<"\n";
-		CA->dump();
-		errs()<<"========================"<<"\n";*/
 	 }else if(ConstantExpr *CE = dyn_cast<ConstantExpr>(Const)){
 	 	unsigned int result = 0;
-	 	result = CE->getOperand(0)->getValueName();
-	 	for(int count = 1;count<CE->getNumOperands();count++){
-			result =+ CE->getOperand(count)->getType()->getPrimitiveSizeInBits();
-	 	}
+	 	if(isa<Function>(CE->getOperand(0))){
+
+ 				//errs()<<"Function"<<"\n";
+
+ 		}else if(isa<ConstantExpr>(CE->getOperand(0))){
+				
+				//errs()<<"==========="<<"\n";
+ 			
+ 		}else {
+
+				//CE->dump();
+ 		}
+	 	return BV;
+
+	 }else if(ConstantArray* CA = dyn_cast<ConstantArray>(Const)){
+	 	//->consist of first class type 
+	 	Constant *CAC = dyn_cast<Constant>(CA->getOperand(0));
+
+ 		if(isa<ConstantStruct>(CAC)){
+
+ 				return getBitVector(CAC);
+
+ 		}else if(isa<ConstantExpr>(CAC)){
+
+ 				return getBitVector(CAC);
+
+ 		}else if(isa<ConstantPointerNull>(CAC)){
+
+ 				//errs()<<"NULL Pointer"<<"\n";
+ 		}
+
+
 	 }else if(UndefValue* UV = dyn_cast<UndefValue>(Const)){
 		errs()<<"UndefValue"<<"\n";
 	 }else{
 		
 		errs()<<"UnCaught Cases"<<"\n";
 	}
-         return BV;
+
+		//Default Return
+	    return BV;
+
     }
 
     void outputBitVector(std::shared_ptr<BitVector> BV) {
-        	int i = BV->size()-1;
+        int i = BV->size()-1;
+        if(i<=0)
+        	return;
 		for (; i >=0; --i) { 
 			if(BV->test(i)){
-				//errs()<<1;
+				errs()<<1;
 			}
 			else{
-				//errs()<<0;
+				errs()<<0;
 			}
 		}
-		//errs() << "\n";	
-		// Output BV to stdin in proper way
+		errs() << "\n";	
+
     }
 
-    // TODO Writing code here (e.g. adding functions)
+    std::shared_ptr<BitVector> boolv2bitv(std::vector<bool> all){
+		std::shared_ptr<BitVector> bitv  = std::make_shared<BitVector>(all.size(),false);
+		reverse(all.begin(),all.end());
+		int i=0;
+		for (std::vector<bool>::iterator it = all.begin() ; it != all.end(); ++it){
+    		if(*it){
+				bitv->set(i);
+    		}
+    		i++;
+		}
+
+
+		return bitv;
+    }
+
+
   };
 }
 
